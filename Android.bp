@@ -1,0 +1,41 @@
+cc_library_shared {
+    name: "libaio",
+
+    srcs: [
+        "src/io_queue_init.c",
+        "src/io_queue_release.c",
+        "src/io_queue_wait.c",
+        "src/io_queue_run.c",
+        "src/io_getevents.c",
+        "src/io_submit.c",
+        "src/io_cancel.c",
+        "src/io_setup.c",
+        "src/io_destroy.c",
+        "src/raw_syscall.c",
+        "src/compat-0_1.c",
+    ],
+
+    whole_static_libs: [],
+    shared_libs: [],
+
+    arch: {
+        arm: {
+            cflags: ["-D__arm__"],
+        },
+    },
+
+    cflags: [
+        "-Werror",
+        "-nostdlib",
+        "-nostartfiles",
+        "-Wall",
+        "-fPIC",
+        "-g",
+        "-fomit-frame-pointer",
+        "-O2",
+        "-DANDROID",
+    ],
+    local_include_dirs: ["src"],
+
+    export_include_dirs: ["src/"],
+}
